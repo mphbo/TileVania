@@ -7,12 +7,14 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float runSpeed = 10f;
     [SerializeField] float jumpSpeed = 100f;
+    [SerializeField] float dieSpeed = 120f;
     [SerializeField] float climbSpeed = 5f;
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
     Animator myAnimator;
     CapsuleCollider2D myBodyCollider;
     BoxCollider2D myFeetCollider;
+    bool isAlive = true;
     float gravityScaleAtStart;
     void Start()
     {
@@ -25,22 +27,49 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (!isAlive)
+        {
+            return;
+        }
         Run();
         FlipSprite();
         ClimbLadder();
+        Die();
     }
 
     void OnMove(InputValue value)
     {
+        if (!isAlive)
+        {
+            return;
+        }
         moveInput = value.Get<Vector2>();
         Debug.Log(moveInput);
     }
     void OnJump(InputValue value)
     {
+        Debug.Log(value);
+        if (!isAlive)
+        {
+            return;
+        }
         if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) return;
         if (value.isPressed)
         {
             myRigidbody.velocity += new Vector2(0f, jumpSpeed);
+        }
+    }
+
+    void OnFire(InputValue value)
+    {
+        Debug.Log(value);
+        if (!isAlive)
+        {
+            return;
+        }
+        if (value.isPressed)
+        {
+            myAnimator.SetTrigger("Shooting");
         }
     }
 
@@ -73,6 +102,16 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody.gravityScale = 0f;
         bool playerHasVerticalSpeed = Mathf.Abs(myRigidbody.velocity.y) > Mathf.Epsilon;
         myAnimator.SetBool("isClimbing", playerHasVerticalSpeed);
+    }
+    void Die()
+    {
+        if (myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemies", "Hazards")))
+        {
+            isAlive = false;
+            myAnimator.SetTrigger("Dying");
+            myRigidbody.velocity = new Vector2(0f, dieSpeed);
+            // myRigidbody.velocity += new Vector2(0f, dieSpeed);
+        }
     }
 }
 

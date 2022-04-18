@@ -265,8 +265,30 @@
                 },
                 {
                     "name": "",
-                    "id": "548e0e36-0a0a-4848-8607-e0c60a275bd7",
+                    "id": "55f4dc7f-edd4-4110-8bf2-a3458eca5c20",
                     "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7d9ac97-322e-4a5d-88b1-e40e779ec129",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "548e0e36-0a0a-4848-8607-e0c60a275bd7",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
