@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpSpeed = 100f;
     [SerializeField] float dieSpeed = 120f;
     [SerializeField] float climbSpeed = 5f;
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform gun;
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
     Animator myAnimator;
@@ -70,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
         if (value.isPressed)
         {
             myAnimator.SetTrigger("Shooting");
+            Instantiate(bullet, gun.position, transform.rotation);
         }
     }
 
