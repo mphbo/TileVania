@@ -7,7 +7,6 @@ using TMPro;
 public class GameSession : MonoBehaviour
 {
     [SerializeField] int playersLives = 3;
-    [SerializeField] int coinValue = 100;
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] int score = 0;
@@ -51,6 +50,7 @@ public class GameSession : MonoBehaviour
     {
         SceneManager.LoadScene(0);
         Destroy(gameObject);
+        FindObjectOfType<ScenePersist>().ResetScenePersist();
     }
 
     void TakeLife()
